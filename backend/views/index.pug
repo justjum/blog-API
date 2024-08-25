@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome. Enter credentials here.
+  div.container
+    form.form(action="" method="post")
+      label.form-label(for="username") Username: 
+      input.form-control(type="text" name="username") 
+      label.form-label(for="f_name") First name: 
+      input.form-control(type="text" name="f_name")
+      label.form-label(for="l_name") Last name: 
+      input.form-control(type="text" name="l_name")
+      label.form-label(for="email") Email: 
+      input.form-control(type="text" name="email")
+      label.form-label(for="author") Author?
+      select.form-control#author(name="author")
+        option(value="") Select 
+        option(value="Yes") Yes
+        option(value="No")  No
+      label.form-label(for="password") Password: 
+      input.form-control(type="password" name="password")
+      label.form-label(for="password-confirm") Confirm Password: 
+      input.form-control(type="password" name="password-confirm")
+      button.form-control(type="submit") Submit
