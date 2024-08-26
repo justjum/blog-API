@@ -6,13 +6,13 @@ block content
   div.container
     form.form(action="" method="post")
       label.form-label(for="username") Username: 
-      input.form-control(type="text" name="username") 
+      input.form-control(type="text" name="username" value=`${newUser ? newUser.username: ''}`) 
       label.form-label(for="f_name") First name: 
-      input.form-control(type="text" name="f_name")
+      input.form-control(type="text" name="f_name" value=`${newUser ? newUser.f_name: ""}`)
       label.form-label(for="l_name") Last name: 
-      input.form-control(type="text" name="l_name")
+      input.form-control(type="text" name="l_name" value=`${newUser ? newUser.l_name: ""}`)
       label.form-label(for="email") Email: 
-      input.form-control(type="text" name="email")
+      input.form-control(type="text" name="email" value=`${newUser ? newUser.email:""}`)
       label.form-label(for="author") Author?
       select.form-control#author(name="author")
         option(value="") Select 
@@ -23,3 +23,7 @@ block content
       label.form-label(for="password-confirm") Confirm Password: 
       input.form-control(type="password" name="password-confirm")
       button.form-control(type="submit") Submit
+    hr
+    if (errors)
+      for error in errors 
+        p= error.msg

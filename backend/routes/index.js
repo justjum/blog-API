@@ -1,13 +1,10 @@
 var express = require("express");
 var router = express.Router();
+const indexController = require("../controllers/indexController");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Blog Backend" });
-});
+router.get("/", indexController.indexGet);
 
-router.post("/", async function (req, res, next) {
-  
-})
+router.post("/", indexController.indexPost);
 
 module.exports = router;
