@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const { DateTime } = require("luxon");
 const PrismaClient = require("@prisma/client").PrismaClient;
+const jwt = require("jsonwebtoken");
 
 const prisma = new PrismaClient();
 
@@ -105,3 +106,31 @@ exports.indexPost = [
     }
   },
 ];
+
+exports.loginPost = async function (req, res, next) {
+  try {
+    const user = await prisma.user.findFirst({
+      where: { username: req.body.username },
+    });
+
+    if (!user) {
+      return res
+        .status(401)
+        .json({ error: "Authentication failed, please try again." });
+    }
+    const passwordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!passwordMatch) {
+      return res
+        .status(401)
+        .json({ error: "Password failed, please try again." });
+    }
+    const token = jwt.sign({ id: user.id }, "secretthree", { expiresIn: "1h" });
+    console.log(token);
+    res.status(200).json({ token });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
