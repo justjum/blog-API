@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const { DateTime } = require("luxon");
 const PrismaClient = require("@prisma/client").PrismaClient;
-const verifyToken = require("../config/jwt");
+const verifyToken = require("../config/jwtauth");
 
 const prisma = new PrismaClient();
 
@@ -15,16 +15,15 @@ exports.postPost = [
 
   async function (req, res, next) {
     const errors = validationResult(req);
-
+    console.log(req.userId);
     if (!errors.isEmpty()) {
       res.error(errors);
     }
 
     try {
-      verifyToken(req, res, next);
       await prisma.post.create({
         data: {
-          userId: "b82d3c48-6858-4231-a6b5-86746a38e35a",
+          userId: req.userId,
           title: req.body.title,
           text: req.body.text,
         },

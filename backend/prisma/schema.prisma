@@ -39,7 +39,7 @@ model Post {
   title     String
   text      String
   image     String    @default("")
-  createdAt DateTime  @default(now()) @db.Date
+  createdAt DateTime  @default(now())
   Comment   Comment[]
   published Boolean   @default(false)
 }
@@ -50,5 +50,5 @@ model Comment {
   userId    String   @db.Uuid
   post      Post     @relation(fields: [postId], references: [id])
   postId    String   @db.Uuid
-  createdAt DateTime @default(now()) @db.Date
+  createdAt DateTime @default(now())
 }
