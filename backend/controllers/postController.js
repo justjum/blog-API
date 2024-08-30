@@ -1,13 +1,28 @@
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
-const { DateTime } = require("luxon");
 const PrismaClient = require("@prisma/client").PrismaClient;
-const verifyToken = require("../config/jwtauth");
 
 const prisma = new PrismaClient();
 
-exports.getPost = async function (req, res, next) {};
+exports.getPost = async function (req, res, next) {
+  console.log(req.params);
+  const post = await prisma.post.findFirst({
+    where: {
+      id: req.params.id,
+    },
+  });
+  if (post) {
+    res.json(post);
+  } else {
+    res.json({ msg: "Post not found" });
+  }
+};
+
+exports.getAllPosts = async function (req, res, next) {
+  const posts = await prisma.post.findMany();
+  res.json(posts);
+};
 
 exports.postPost = [
   body("title", "Post must have title,").isLength({ min: 3, max: 100 }),
@@ -25,17 +40,20 @@ exports.postPost = [
         data: {
           userId: req.userId,
           title: req.body.title,
+          keyword: req.body.keyword,
           text: req.body.text,
         },
       });
-      res.redirect("/");
+      res.json({
+        msg: "Post Created",
+      });
     } catch (err) {
       return next(err);
     }
   },
 ];
 
-exports.putPost = async function (req, res, next) {};
+exports.updatePost = async function (req, res, next) {};
 
 exports.deletePost = async function (req, res, next) {};
 

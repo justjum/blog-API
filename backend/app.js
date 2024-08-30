@@ -11,6 +11,7 @@ const { PrismaClient } = require("@prisma/client");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const postRouter = require("./routes/post");
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use(
 require("./config/passport");
 
 app.use("/", indexRouter);
+app.use("/post", postRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
