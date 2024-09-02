@@ -51,5 +51,6 @@ model Comment {
   userId    String   @db.Uuid
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String   @db.Uuid
+  text      String
   createdAt DateTime @default(now())
 }

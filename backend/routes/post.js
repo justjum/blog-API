@@ -10,18 +10,26 @@ router.get("/:postId", postController.getPost);
 
 router.post("/", verifyToken, postController.postPost);
 
-router.put("/:postId", postController.updatePost);
+router.put("/:postId", verifyToken, postController.updatePost);
 
-router.delete("/:postId", postController.deletePost);
+router.delete("/:postId", verifyToken, postController.deletePost);
 
-router.get("/:postId/comments", commentController.getAllComments);
+router.get("/:postId/comment", commentController.getAllComments);
 
-router.get("/:postId/comments/:commentId", commentController.getComment);
+router.get("/:postId/comment/:commentId", commentController.getComment);
 
-router.post("/:postId/comments/", verifyToken, commentController.postComment);
+router.post("/:postId/comment/", verifyToken, commentController.postComment);
 
-router.put("/:postId/comments/:commentId", commentController.updateComment);
+router.put(
+  "/:postId/comment/:commentId",
+  verifyToken,
+  commentController.updateComment
+);
 
-router.delete("/:postId/comments/:commentId", commentController.deleteComment);
+router.delete(
+  "/:postId/comment/:commentId",
+  verifyToken,
+  commentController.deleteComment
+);
 
 module.exports = router;

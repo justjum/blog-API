@@ -53,7 +53,34 @@ exports.postPost = [
   },
 ];
 
-exports.updatePost = async function (req, res, next) {};
+exports.updatePost = async function (req, res, next) {
+  console.log(req.userId);
+  const user = await prisma.user.findFirst({
+    where: {
+      id: req.userId,
+    },
+  });
+
+  if (!user.isAuthor) {
+    res.status(401).send("This area is not for you.");
+  } else {
+    try {
+      await prisma.post.update({
+        where: {
+          id: req.body.id,
+        },
+        data: {
+          title: req.body.title,
+          keyword: req.body.keyword,
+          text: req.body.text,
+        },
+      });
+      res.json({ msg: "Post updated" });
+    } catch (err) {
+      res.status(500).json({ error: "Error updating post." });
+    }
+  }
+};
 
 exports.deletePost = async function (req, res, next) {
   try {
@@ -65,7 +92,7 @@ exports.deletePost = async function (req, res, next) {
     });
     res.json({ msg: "Post Deleted" });
   } catch (err) {
-    res.json({ error: err.meta.cause });
+    res.status(500).json({ error: "Error deleting post" });
   }
 };
 
