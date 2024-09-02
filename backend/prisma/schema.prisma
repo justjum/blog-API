@@ -34,7 +34,7 @@ model Session {
 
 model Post {
   id        String    @id @default(uuid()) @db.Uuid
-  author    User      @relation(fields: [userId], references: [id])
+  author    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String    @db.Uuid
   title     String
   keyword   String[]
@@ -47,9 +47,9 @@ model Post {
 
 model Comment {
   id        String   @id @default(uuid()) @db.Uuid
-  author    User     @relation(fields: [userId], references: [id])
+  author    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String   @db.Uuid
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String   @db.Uuid
   createdAt DateTime @default(now())
 }

@@ -55,7 +55,19 @@ exports.postPost = [
 
 exports.updatePost = async function (req, res, next) {};
 
-exports.deletePost = async function (req, res, next) {};
+exports.deletePost = async function (req, res, next) {
+  try {
+    await prisma.post.delete({
+      where: {
+        userId: req.userId,
+        id: req.body.id,
+      },
+    });
+    res.json({ msg: "Post Deleted" });
+  } catch (err) {
+    res.json({ error: err.meta.cause });
+  }
+};
 
 // model Post {
 //     id        String    @id @default(uuid()) @db.Uuid
