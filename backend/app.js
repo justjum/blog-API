@@ -20,12 +20,8 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-// Cors function
-app.use(cors());
-
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -46,6 +42,28 @@ app.use(
 );
 //app.use(passport.session());
 require("./config/passport");
+
+// Cors function
+// app.use(
+//   cors({
+//     allowedHeaders: [
+//       "Content-Type",
+//       "Authorization",
+//       "Access-Control-Allow-Origin",
+//     ],
+//   })
+// );
+app.options(
+  "*",
+  cors({
+    origin: "http://localhost:5173/",
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+    ],
+  })
+);
 
 app.use("/", indexRouter);
 app.use("/post", postRouter);

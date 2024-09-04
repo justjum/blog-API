@@ -109,6 +109,9 @@ exports.indexPost = [
 
 exports.loginPost = async function (req, res, next) {
   try {
+    console.log(req.body);
+    console.log(req.json);
+    console.log(req.headers);
     const user = await prisma.user.findFirst({
       where: { username: req.body.username },
     });
