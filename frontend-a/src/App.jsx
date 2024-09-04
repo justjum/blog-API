@@ -5,7 +5,9 @@ import "./App.css";
 function App() {
   const [user, setUser] = useState(null);
 
-  console.log(Headers);
+  if (localStorage.token !== null) {
+    authoriseUser();
+  }
 
   return <>{user ? "" : <Login />}</>;
 }
