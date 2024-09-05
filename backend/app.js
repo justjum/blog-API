@@ -16,6 +16,20 @@ const cors = require("cors");
 
 var app = express();
 
+app.use(cors());
+
+// app.options(
+//   "http://localhost:5173/",
+//   cors({
+//     origin: "http://localhost:5173/",
+//     allowedHeaders: [
+//       "Content-Type",
+//       "Authorization",
+//       "Access-Control-Allow-Origin",
+//     ],
+//   })
+// );
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -53,17 +67,6 @@ require("./config/passport");
 //     ],
 //   })
 // );
-app.options(
-  "*",
-  cors({
-    origin: "http://localhost:5173/",
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Access-Control-Allow-Origin",
-    ],
-  })
-);
 
 app.use("/", indexRouter);
 app.use("/post", postRouter);

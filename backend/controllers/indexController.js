@@ -137,3 +137,7 @@ exports.loginPost = async function (req, res, next) {
     res.status(500).json(err);
   }
 };
+
+exports.test = async function (req, res, next) {
+  res.json({ ok: "sure" });
+};

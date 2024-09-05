@@ -10,36 +10,31 @@ export default function Login() {
     console.log("Fetching");
 
     const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: {
-        username: username,
-        password: password,
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
       },
+      // body: {
+      //   username: username,
+      //   password: password,
+      // },
       mode: "cors",
     };
 
     console.log(requestOptions);
 
-    fetch("//127.0.0.1:3000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: {
-        username: username,
-        password: password,
-      },
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUsername("");
-        setPassword("");
-        console.log(data);
-        // note using deconstructuring is better for cleaner code
-        const { access, refresh } = data.access_token;
-        localStorage.setItem("accessToken", access);
-        localStorage.setItem("refreshToken", refresh);
-      });
+    fetch("//127.0.0.1:3000/test", requestOptions).then((response) =>
+      response.json().then((data) => console.log(data))
+    );
+    // .then((data) => {
+    //   setUsername("");
+    //   setPassword("");
+    //   console.log(data);
+    //   // note using deconstructuring is better for cleaner code
+    //   const { access, refresh } = data.access_token;
+    //   localStorage.setItem("accessToken", access);
+    //   localStorage.setItem("refreshToken", refresh);
+    // });
   };
 
   return (
