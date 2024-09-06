@@ -1,17 +1,12 @@
 import { useState } from "react";
 import Login from "../components/login";
+import BlogPosts from "../components/blog-posts";
 import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null);
 
-  if (localStorage.token !== null && localStorage.token !== undefined) {
-    console.log(localStorage.token);
-  } else {
-    console.log("no token");
-  }
-
-  return <>{user ? "" : <Login />}</>;
+  return <>{localStorage.accessToken ? <BlogPosts /> : <Login />}</>;
 }
 
 export default App;
