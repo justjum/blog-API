@@ -18,17 +18,17 @@ var app = express();
 
 app.use(cors());
 
-// app.options(
-//   "http://localhost:5173/",
-//   cors({
-//     origin: "http://localhost:5173/",
-//     allowedHeaders: [
-//       "Content-Type",
-//       "Authorization",
-//       "Access-Control-Allow-Origin",
-//     ],
-//   })
-// );
+app.options(
+  "http://localhost:5173/",
+  cors({
+    origin: "http://localhost:5173/",
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+    ],
+  })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

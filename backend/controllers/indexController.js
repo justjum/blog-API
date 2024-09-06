@@ -8,9 +8,8 @@ const jwt = require("jsonwebtoken");
 const prisma = new PrismaClient();
 
 exports.indexGet = async function (req, res, next) {
-  res.render("index", {
+  res.json({
     title: "Blog API",
-    user: req.user,
   });
 };
 
@@ -35,7 +34,13 @@ exports.logout = function (req, res, next) {
   });
 };
 
-exports.indexPost = [
+exports.indexPost = async function (req, res, next) {
+  console.log(req.body);
+  console.log("working");
+  res.json(req.body);
+};
+
+exports.indexSignup = [
   body("username", "Username must be at least 5 characters")
     .isLength({
       min: 5,
@@ -109,9 +114,6 @@ exports.indexPost = [
 
 exports.loginPost = async function (req, res, next) {
   try {
-    console.log(req.body);
-    console.log(req.json);
-    console.log(req.headers);
     const user = await prisma.user.findFirst({
       where: { username: req.body.username },
     });
