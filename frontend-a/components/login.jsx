@@ -1,8 +1,10 @@
 import { useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();

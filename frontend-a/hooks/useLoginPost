@@ -1,0 +1,50 @@
+import {useEffect, useState} from "react";
+
+const useLoginPost = ( {username, password }) => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const requestOptions = {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+        mode: "cors",
+      };
+  
+    console.log(requestOptions);
+
+    useEffect(() => {
+      const loginUser = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(
+            "//127.0.0.1:3000/login"
+          ).then((response) =>
+            response.json().then((data) => {
+              // Reset the login form
+              console.log(data.token);
+              // Save token to local storage
+              localStorage.setItem("accessToken", data.token);
+            })
+          );
+          if (!response.ok) {
+            throw new Error(response.status);
+          }
+        } catch (err) {
+          setError(err.message);
+
+        } finally {
+          setLoading(false);
+        }
+        
+      };
+      loginUser();
+    });
+}
+
+export default useLoginPost;
