@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function BlogPosts() {
+  const [posts, setPosts] = useState(null);
+
   const requestOptions = {
     method: "get",
     headers: {
@@ -10,9 +12,25 @@ export default function BlogPosts() {
     mode: "cors",
   };
 
-  fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
-    response.json().then((data) => {
-      console.log(data);
-    })
+  useEffect(() => {
+    fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
+      response.json().then((data) => {
+        setPosts(data);
+      })
+    );
+  }, []);
+
+  return (
+    <>
+      <ul>
+        {posts
+          ? posts.map((post) => (
+              <li key={post.id}>
+                {post.title} {post.text}
+              </li>
+            ))
+          : ""}
+      </ul>
+    </>
   );
 }

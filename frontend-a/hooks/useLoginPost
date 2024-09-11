@@ -1,50 +1,92 @@
 import {useEffect, useState} from "react";
 
-const useLoginPost = ( {username, password }) => {
+const useLoginPost = ( props ) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const requestOptions = {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: props.username,
+        password: props.password,
+      }),
+      mode: "cors",
+    };
+
+    console.log(requestOptions);
+
+    useEffect(() => {
+      fetch("//127.0.0.1:3000/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          password: password,
+          username: props.username,
+          password: props.password,
         }),
         mode: "cors",
-      };
+      })
+      .then((response) =>
+        response.json().then((data) => {
+          // Reset the login form
+          props.setUsername("");
+          props.setPassword("");
+          console.log(data.token);
+          // Save token to local storage
+          localStorage.setItem("accessToken", data.token);
+        })
+      );
+    },[])
+
+
+
+
+
+    // const requestOptions = {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       username: username,
+    //       password: password,
+    //     }),
+    //     mode: "cors",
+    //   };
   
-    console.log(requestOptions);
+    // console.log(requestOptions);
 
-    useEffect(() => {
-      const loginUser = async () => {
-        setLoading(true);
-        try {
-          const response = await fetch(
-            "//127.0.0.1:3000/login"
-          ).then((response) =>
-            response.json().then((data) => {
-              // Reset the login form
-              console.log(data.token);
-              // Save token to local storage
-              localStorage.setItem("accessToken", data.token);
-            })
-          );
-          if (!response.ok) {
-            throw new Error(response.status);
-          }
-        } catch (err) {
-          setError(err.message);
+    // useEffect(() => {
+    //   const loginUser = async () => {
+    //     setLoading(true);
+    //     try {
+    //       const response = await fetch(
+    //         "//127.0.0.1:3000/login"
+    //       ).then((response) =>
+    //         response.json().then((data) => {
+    //           // Reset the login form
+    //           console.log(data.token);
+    //           // Save token to local storage
+    //           localStorage.setItem("accessToken", data.token);
+    //         })
+    //       );
+    //       if (!response.ok) {
+    //         throw new Error(response.status);
+    //       }
+    //     } catch (err) {
+    //       setError(err.message);
 
-        } finally {
-          setLoading(false);
-        }
+    //     } finally {
+    //       setLoading(false);
+    //     }
         
-      };
-      loginUser();
-    });
+    //   };
+    //   loginUser();
+    // });
 }
 
 export default useLoginPost;
