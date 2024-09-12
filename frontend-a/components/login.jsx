@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-export default function Login() {
+export default function Login({ handleLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(false);
 
   //ORIGINAL FETCH CALL
   const handleSubmit = (e) => {
@@ -32,6 +31,7 @@ export default function Login() {
         console.log(data.token);
         // Save token to local storage
         localStorage.setItem("accessToken", data.token);
+        handleLogin();
       })
     );
   };

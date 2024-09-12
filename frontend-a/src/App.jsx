@@ -1,12 +1,24 @@
 import { useState } from "react";
 import Login from "../components/login";
-import BlogPosts from "../components/blog-posts";
+import Home from "../components/home";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return <>{localStorage.accessToken ? <BlogPosts /> : <Login />}</>;
+  function handleLogin(e) {
+    setIsLoggedIn(!isLoggedIn);
+  }
+
+  return (
+    <>
+      {localStorage.accessToken ? (
+        <Home handleLogin={handleLogin} />
+      ) : (
+        <Login handleLogin={handleLogin} />
+      )}
+    </>
+  );
 }
 
 export default App;
