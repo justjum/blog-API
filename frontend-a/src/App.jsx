@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Login from "../components/login";
+import Header from "../components/header";
 import Home from "../components/home";
 import "./App.css";
 
@@ -7,16 +7,13 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleLogin(e) {
-    setIsLoggedIn(!isLoggedIn);
+    setIsLoggedIn(e);
   }
 
   return (
     <>
-      {localStorage.accessToken ? (
-        <Home handleLogin={handleLogin} />
-      ) : (
-        <Login handleLogin={handleLogin} />
-      )}
+      <Header isLoggedIn={isLoggedIn} handleLogin={handleLogin} />
+      <Home handleLogin={handleLogin} />
     </>
   );
 }
