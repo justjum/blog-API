@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 90%;
 }
 
 .logo {
@@ -41,11 +42,4 @@
   color: #888;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  height: 100px;
-  align-items: space-evenly;
-  justify-content: space-between;
-}
 

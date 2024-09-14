@@ -11,7 +11,27 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
+
+
+.header {
+  background-color: #a4c991;
+  padding: 10px 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.loginForm {
+  display: flex;
+  margin: 5px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 
 a {
   font-weight: 500;
@@ -25,7 +45,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }

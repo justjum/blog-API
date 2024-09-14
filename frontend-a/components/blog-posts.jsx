@@ -15,6 +15,7 @@ export default function BlogPosts() {
   useEffect(() => {
     fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
       response.json().then((data) => {
+        console.log(data);
         setPosts(data);
       })
     );
@@ -25,9 +26,14 @@ export default function BlogPosts() {
       <ul>
         {posts
           ? posts.map((post) => (
-              <li key={post.id}>
-                {post.title} {post.text}
-              </li>
+              <div className="post-card" key={post.id}>
+                <div className="card-title">
+                  <h3>{post.title}</h3>
+                </div>
+                <div className="card-body">
+                  <p>{post.text}</p>
+                </div>
+              </div>
             ))
           : ""}
       </ul>
