@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/header";
 import Home from "../components/home";
 import SignUp from "../components/sign-up";
@@ -12,19 +12,23 @@ function App() {
     setIsLoggedIn(e);
   }
 
-  function handleSignUp(e) {
-    setDisplaySignUp(e);
-  }
+  const useSignUpPopup = (e) => {
+    useEffect(() => {
+      alert(e);
+      console.log(e);
+      setDisplaySignUp(e);
+    });
+  };
 
   return (
     <>
       <Header
         isLoggedIn={isLoggedIn}
         handleLogin={handleLogin}
-        handleSignUp={handleSignUp}
+        useSignUpPopup={useSignUpPopup}
       />
       <Home handleLogin={handleLogin} />
-      <SignUp handleSignUp={handleSignUp} displaySignUp={displaySignUp} />
+      <SignUp useSignUpPopup={useSignUpPopup} displaySignUp={displaySignUp} />
     </>
   );
 }

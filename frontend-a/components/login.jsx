@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useSignUpPopup from "../hooks/useSignUpPopup";
 
-export default function Login({ handleLogin, handleSignUp }) {
+export default function Login({ handleLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,8 +34,11 @@ export default function Login({ handleLogin, handleSignUp }) {
     );
   };
 
-  const handleSignUpClick = () => {
-    handleSignUp(true);
+  const handleSignUpClick = (e) => {
+    const dialog = document.querySelector("dialog");
+    e.preventDefault();
+    dialog.showModal();
+    //useSignUpPopup(true);
   };
 
   return (
@@ -47,6 +51,7 @@ export default function Login({ handleLogin, handleSignUp }) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
+            className="formInput"
           />
           <input
             type="password"
@@ -54,6 +59,7 @@ export default function Login({ handleLogin, handleSignUp }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            className="formInput"
           />
           <button type="submit">Login</button>
         </form>

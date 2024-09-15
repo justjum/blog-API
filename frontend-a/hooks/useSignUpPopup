@@ -1,0 +1,9 @@
+import {useState, useEffect} from 'react';
+
+const useLoginPopup = () => {
+    useEffect(() => {
+        console.log('signup')
+    },[]);
+}
+
+export default useLoginPopup;

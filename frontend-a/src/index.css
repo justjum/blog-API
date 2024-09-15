@@ -25,11 +25,33 @@
   flex-wrap: wrap;
 }
 
+dialog {
+  border-radius: 10px;
+}
+
 .loginForm {
   display: flex;
   margin: 5px;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  margin: 2px;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.post-card {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 80%;
+  margin: 10px;
 }
 
 

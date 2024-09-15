@@ -2,7 +2,7 @@ import { useState } from "react";
 import Logout from "../components/logout";
 import Login from "../components/login";
 
-export default function Header({ isLoggedIn, handleLogin, handleSignUp }) {
+export default function Header({ isLoggedIn, handleLogin, useSignUpPopup }) {
   return (
     <>
       <div className="header">
@@ -10,7 +10,7 @@ export default function Header({ isLoggedIn, handleLogin, handleSignUp }) {
         {isLoggedIn == true ? (
           <Logout handleLogin={handleLogin} />
         ) : (
-          <Login handleLogin={handleLogin} handleSignUp={handleSignUp} />
+          <Login handleLogin={handleLogin} useSignUpPopup={useSignUpPopup} />
         )}
       </div>
     </>
