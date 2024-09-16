@@ -42,9 +42,13 @@ dialog {
 }
 
 .formInput {
-  margin: 2px;
+  margin: 3px;
   padding: 10px;
   border-radius: 3px;
+}
+
+section {
+  display: block;
 }
 
 .post-card {
