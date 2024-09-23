@@ -7,12 +7,21 @@ import "./App.css";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displaySignUp, setDisplaySignUp] = useState(false);
+  const [displayError, setDisplayError] = useState(false);
 
   function handleLogin(e) {
     setIsLoggedIn(e);
   }
 
   const useSignUpPopup = (e) => {
+    useEffect(() => {
+      alert(e);
+      console.log(e);
+      setDisplaySignUp(e);
+    });
+  };
+
+  const useErrorPopup = (e) => {
     useEffect(() => {
       alert(e);
       console.log(e);

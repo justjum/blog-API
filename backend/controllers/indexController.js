@@ -84,7 +84,7 @@ exports.indexSignup = [
 
     if (!errors.isEmpty()) {
       console.log("error");
-      res.render("", {
+      res.json( {
         title: "Blog API",
         subtitle: "Login",
         errors: errors.array(),
@@ -103,9 +103,9 @@ exports.indexSignup = [
               password: hashedPassword,
             },
           });
-          res.redirect("/");
+          res.status(200).json({msg:"Sign Up Successful"});
         } catch (err) {
-          return next(err);
+          res.status(500).json(err);
         }
       });
     }

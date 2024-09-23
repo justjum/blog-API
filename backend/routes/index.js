@@ -12,7 +12,7 @@ router.get("/", indexController.indexGet);
 
 router.get("/test", indexController.test);
 
-router.post("/", indexController.indexPost);
+router.post("/", indexController.indexSignup);
 
 router.post("/login", hello, indexController.loginPost);
 

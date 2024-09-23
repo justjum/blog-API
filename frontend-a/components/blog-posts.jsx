@@ -18,7 +18,12 @@ export default function BlogPosts() {
     fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
       response.json().then((data) => {
         console.log(data);
-        setPosts(data);
+        if (data == []) {
+          setPosts(null);
+        } else {
+          setPosts(data);
+        }
+        console.log(posts);
       })
     );
   }, []);
@@ -80,7 +85,7 @@ export default function BlogPosts() {
       ) : (
         <section>
           {posts
-            ? posts.map((post) => {
+             ? posts.map((post) => {
                 return post.published ? (
                   <div className="post-card center" key={post.id}>
                     <div className="card-title">
@@ -100,10 +105,10 @@ export default function BlogPosts() {
                     </div>
                   </div>
                 ) : (
-                  ""
+                 "" 
                 );
               })
-            : ""}
+            : (<p>"No posts"</p>) }
         </section>
       )}
     </>
