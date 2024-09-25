@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import useSignUpPopup from "../hooks/useSignUpPopup";
-import Alert from "../components/alert"
+import Alert from "../components/alert";
 
-export default function Login({ handleLogin }) {
+export default function Login({ handleLogin, setAlertMessage }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [alertMessage, setAlertMessage] = useState("");
 
   //ORIGINAL FETCH CALL
   const handleSubmit = (e) => {
@@ -29,7 +28,7 @@ export default function Login({ handleLogin }) {
         // Reset the login form
         if (data.error) {
           const alertDialog = document.getElementById("alert-dialog");
-          setAlertMessage(data.error)
+          setAlertMessage(data.error);
           alertDialog.showModal();
         }
         if (data.token) {
@@ -76,20 +75,18 @@ export default function Login({ handleLogin }) {
           (Login or Sign Up to Comment)
         </a>
       </div>
-      <Alert alertMessage={alertMessage} />
-
     </>
   );
 }
 
-// {show && (<Alert 
+// {show && (<Alert
 //   className='center'
 //   variant="danger"
-//   onClose={() => setShow(false)} 
-//   dismissible> 
-    
-//   <Alert.Heading>Error</Alert.Heading> 
-//   <p>Error message goes here.</p> 
+//   onClose={() => setShow(false)}
+//   dismissible>
+
+//   <Alert.Heading>Error</Alert.Heading>
+//   <p>Error message goes here.</p>
 // </Alert> )
 
 // }

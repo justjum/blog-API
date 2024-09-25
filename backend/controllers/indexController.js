@@ -62,7 +62,7 @@ exports.indexSignup = [
       max: 20,
     })
     .escape(),
-  body("password-confirm", "Passwords do not match").custom(
+  body("passwordConfirm", "Passwords do not match").custom(
     async (value, { req }) => {
       console.log(value);
       console.log(req.body.password);
@@ -85,10 +85,7 @@ exports.indexSignup = [
     if (!errors.isEmpty()) {
       console.log("error");
       res.json( {
-        title: "Blog API",
-        subtitle: "Login",
         errors: errors.array(),
-        newUser: newUser,
       });
     } else {
       bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {

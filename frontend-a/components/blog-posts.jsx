@@ -18,11 +18,7 @@ export default function BlogPosts() {
     fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
       response.json().then((data) => {
         console.log(data);
-        if (data == []) {
-          setPosts(null);
-        } else {
-          setPosts(data);
-        }
+        setPosts(data);
         console.log(posts);
       })
     );
@@ -35,7 +31,6 @@ export default function BlogPosts() {
           requestOptions
         ).then((response) =>
           response.json().then((data) => {
-            console.log(data);
             setComments(data);
           })
         )
@@ -53,64 +48,69 @@ export default function BlogPosts() {
 
   return (
     <>
-      {focusPost ? (
-        <>
-          <div className="post-card center" key={focusPost.id}>
-            <div className="card-title">
-              <h3>{focusPost.title}</h3>
-            </div>
-            <div className="card-body">
-              <p>{focusPost.text}</p>
-            </div>
-            <div className="card-comments">
-              {comments
-                ? comments.map((comment) => {
-                    return (
-                      <>
-                        <p>{comment.text}</p>
-                        <p>{comment.userId}</p>
-                        <p>{comment.createdAt}</p>
-                      </>
-                    );
-                  })
-                : ""}
-            </div>
-            <div>
-              <button className="formInput" onClick={handleClosePost}>
-                Back
-              </button>
-            </div>
-          </div>
-        </>
-      ) : (
-        <section>
-          {posts
-             ? posts.map((post) => {
-                return post.published ? (
-                  <div className="post-card center" key={post.id}>
-                    <div className="card-title">
-                      <h3>{post.title}</h3>
-                    </div>
-                    <div className="card-body">
-                      <p>{post.text}</p>
-                    </div>
-                    <div>
-                      <button
-                        className="formInput"
-                        id={post.id}
-                        onClick={handleFocusPost}
-                      >
-                        Full Post
-                      </button>
-                    </div>
+      <section id="blogPosts" className="center">
+        {posts ? (
+          focusPost ? (
+            <>
+              <div className="post-card center" key={focusPost.id}>
+                <div className="card-title">
+                  <h3>{focusPost.title}</h3>
+                </div>
+                <div className="card-body">
+                  <p>{focusPost.text}</p>
+                </div>
+                <div className="card-comments">
+                  {comments
+                    ? comments.map((comment) => {
+                        return (
+                          <>
+                            <p>{comment.text}</p>
+                            <p>{comment.userId}</p>
+                            <p>{comment.createdAt}</p>
+                          </>
+                        );
+                      })
+                    : ""}
+                </div>
+                <div>
+                  <button className="formInput" onClick={handleClosePost}>
+                    Back
+                  </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            posts.map((post) => {
+              return post.published ? (
+                <div className="post-card center" key={post.id}>
+                  <div className="card-title">
+                    <h3>{post.title}</h3>
                   </div>
-                ) : (
-                 "" 
-                );
-              })
-            : (<p>"No posts"</p>) }
-        </section>
-      )}
+                  <div className="card-body">
+                    <p>{post.text}</p>
+                  </div>
+                  <div>
+                    <button
+                      className="formInput"
+                      id={post.id}
+                      onClick={handleFocusPost}
+                    >
+                      Full Post
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                ""
+              );
+            })
+          )
+        ) : (
+          <>
+            <span>This</span>
+            <p>"No posts"</p>
+          </>
+        )}
+      </section>
     </>
   );
 }

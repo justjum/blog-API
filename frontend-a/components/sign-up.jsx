@@ -1,6 +1,7 @@
 import { useState } from "react";
+import Alert from "../components/alert"
 
-export default function SignUp({ displaySignUp }) {
+export default function SignUp({ displaySignUp, setAlertMessage }) {
   const [username, setUsername] = useState("")
   const [f_name, setF_name] = useState("")
   const [l_name, setL_name] = useState("") 
@@ -9,6 +10,10 @@ export default function SignUp({ displaySignUp }) {
   const [passwordConfirm, setPasswordConfirm] = useState("")
 
   const handleClose = (e) => {
+    const dialog = document.getElementById("signup-dialog");
+    dialog.close();
+  }
+  const handleSignUp = (e) => {
     const dialog = document.getElementById("signup-dialog");
     e.preventDefault();
 
@@ -30,14 +35,26 @@ export default function SignUp({ displaySignUp }) {
 
     fetch("//127.0.0.1:3000/", requestOptions).then((response)=>
     response.json().then((data) => {
-      if (data.error) {
-        console.log(data.error)
+      const alertDialog = document.getElementById("alert-dialog");
+      if (data.errors) {
+        console.log(data.errors)
+        setAlertMessage(data.errors)
+        alertDialog.showModal();
+      } else {
+        setAlertMessage(data.msg);
+        setUsername("");
+        setF_name("");
+        setL_name("");
+        setEmail("");
+        setPassword("");
+        setPasswordConfirm("")
+        console.log(data);
+        dialog.close();
+        alertDialog.showModal();
       }
-      console.log(data);
-
     }))
     
-    dialog.close();
+    
   };
 
   return (
@@ -100,8 +117,11 @@ export default function SignUp({ displaySignUp }) {
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit" onClick={handleClose}>
+            <button type="submit" onClick={handleSignUp}>
               Sign Up
+            </button>
+            <button type="submit" onClick={handleClose}>
+              Close
             </button>
           </form>
         </div>

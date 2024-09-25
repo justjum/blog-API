@@ -11,9 +11,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
-
 
 .header {
   background-color: #a4c991;
@@ -59,7 +57,8 @@ section {
 }
 
 .center {
-
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a {
