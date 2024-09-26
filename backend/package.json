@@ -8,7 +8,7 @@
     "serverstart": "DEBUG=backend:* npm run devstart"
   },
   "dependencies": {
-    "@prisma/client": "^5.18.0",
+    "@prisma/client": "^5.20.0",
     "@quixo3/prisma-session-store": "^3.1.13",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.6",
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "prisma": "^5.18.0"
-  }
+    "prisma": "^5.20.0"
+  },
+  "editor.formatOnSave": true
 }

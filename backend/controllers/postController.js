@@ -42,6 +42,8 @@ exports.postPost = [
           title: req.body.title,
           keyword: req.body.keyword,
           text: req.body.text,
+          image: req.body.image,
+          published: req.body.published
         },
       });
       res.json({
