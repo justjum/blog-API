@@ -1,18 +1,18 @@
 import { useState } from "react";
-import Alert from "../components/alert"
+import Alert from "../components/alert";
 
 export default function SignUp({ displaySignUp, setAlertMessage }) {
-  const [username, setUsername] = useState("")
-  const [f_name, setF_name] = useState("")
-  const [l_name, setL_name] = useState("") 
+  const [username, setUsername] = useState("");
+  const [f_name, setF_name] = useState("");
+  const [l_name, setL_name] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("")
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const handleClose = (e) => {
     const dialog = document.getElementById("signup-dialog");
     dialog.close();
-  }
+  };
   const handleSignUp = (e) => {
     const dialog = document.getElementById("signup-dialog");
     e.preventDefault();
@@ -28,33 +28,32 @@ export default function SignUp({ displaySignUp, setAlertMessage }) {
         l_name: l_name,
         email: email,
         password: password,
-        passwordConfirm: passwordConfirm
+        passwordConfirm: passwordConfirm,
       }),
       mode: "cors",
     };
 
-    fetch("//127.0.0.1:3000/", requestOptions).then((response)=>
-    response.json().then((data) => {
-      const alertDialog = document.getElementById("alert-dialog");
-      if (data.errors) {
-        console.log(data.errors)
-        setAlertMessage(data.errors)
-        alertDialog.showModal();
-      } else {
-        setAlertMessage(data.msg);
-        setUsername("");
-        setF_name("");
-        setL_name("");
-        setEmail("");
-        setPassword("");
-        setPasswordConfirm("")
-        console.log(data);
-        dialog.close();
-        alertDialog.showModal();
-      }
-    }))
-    
-    
+    fetch("//127.0.0.1:3000/", requestOptions).then((response) =>
+      response.json().then((data) => {
+        const alertDialog = document.getElementById("alert-dialog");
+        if (data.errors) {
+          console.log(data.errors);
+          setAlertMessage(data.errors);
+          alertDialog.showModal();
+        } else {
+          setAlertMessage(data.msg);
+          setUsername("");
+          setF_name("");
+          setL_name("");
+          setEmail("");
+          setPassword("");
+          setPasswordConfirm("");
+          console.log(data);
+          dialog.close();
+          alertDialog.showModal();
+        }
+      })
+    );
   };
 
   return (
@@ -99,7 +98,7 @@ export default function SignUp({ displaySignUp, setAlertMessage }) {
               name="email"
               className="formInput"
               value={email}
-              onChange={(e)=> setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
@@ -117,13 +116,17 @@ export default function SignUp({ displaySignUp, setAlertMessage }) {
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit" onClick={handleSignUp}>
+            <button
+              className="button-green"
+              type="submit"
+              onClick={handleSignUp}
+            >
               Sign Up
             </button>
-            <button type="submit" onClick={handleClose}>
-              Close
-            </button>
           </form>
+          <button type="" onClick={handleClose}>
+            Close
+          </button>
         </div>
       </dialog>
     </>

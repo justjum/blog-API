@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import dateFormat from "dateformat";
+import AddComment from "../components/add-comment";
 
-export default function BlogPosts() {
+export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
   const [focusPost, setFocusPost] = useState(null);
   const [comments, setComments] = useState(null);
+  const [addComment, setAddComment] = useState(false);
 
   let requestOptions = {
     method: "get",
@@ -35,7 +38,7 @@ export default function BlogPosts() {
           })
         )
       : "";
-  }, [focusPost]);
+  }, [focusPost, addComment]);
 
   const handleFocusPost = (e) => {
     e.preventDefault();
@@ -46,15 +49,22 @@ export default function BlogPosts() {
     setFocusPost(null);
   };
 
+  const handleComment = () => {
+    setAddComment(true);
+  };
+
   return (
     <>
       <section id="blogPosts" className="center">
         {posts ? (
           focusPost ? (
             <>
-              <div className="post-card center" key={focusPost.id}>
+              <div className="post-card-focus center" key={focusPost.id}>
                 <div className="card-title">
-                  <h3>{focusPost.title}</h3>
+                  <h2>{focusPost.title}</h2>
+                </div>
+                <div className="post-image">
+                  <img src={focusPost.image} alt="" />
                 </div>
                 <div className="card-body">
                   <p>{focusPost.text}</p>
@@ -62,16 +72,34 @@ export default function BlogPosts() {
                 <div className="card-comments">
                   {comments
                     ? comments.map((comment) => {
+                        console.log(comment);
                         return (
-                          <>
-                            <p>{comment.text}</p>
-                            <p>{comment.userId}</p>
-                            <p>{comment.createdAt}</p>
-                          </>
+                          <div className="comment-card center">
+                            <p className="comment-text">{comment.text}</p>
+                            <p className="right">{comment.author.username}</p>
+                            <p className="right">
+                              {dateFormat(comment.createdAt)}
+                            </p>
+                          </div>
                         );
                       })
                     : ""}
                 </div>
+                {isLoggedIn ? (
+                  addComment ? (
+                    <AddComment
+                      setAlertMessage={setAlertMessage}
+                      postId={focusPost.id}
+                      setAddComment={setAddComment}
+                    />
+                  ) : (
+                    <button className="button-green" onClick={handleComment}>
+                      Add Comment
+                    </button>
+                  )
+                ) : (
+                  ""
+                )}
                 <div>
                   <button className="formInput" onClick={handleClosePost}>
                     Back
@@ -83,11 +111,13 @@ export default function BlogPosts() {
             posts.map((post) => {
               return post.published ? (
                 <div className="post-card center" key={post.id}>
-                  <div className="card-title">
-                    <h3>{post.title}</h3>
+                  <div className="card-image">
+                    <a href="">
+                      <img src={post.imageThumb} alt="" />
+                    </a>
                   </div>
                   <div className="card-body">
-                    <p>{post.text}</p>
+                    <h3>{post.title}</h3>
                   </div>
                   <div>
                     <button
@@ -106,7 +136,6 @@ export default function BlogPosts() {
           )
         ) : (
           <>
-            <span>This</span>
             <p>"No posts"</p>
           </>
         )}

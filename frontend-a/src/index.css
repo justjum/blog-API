@@ -49,11 +49,56 @@ section {
   display: block;
 }
 
+#blogPosts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .post-card {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 300px;
+  margin: 10px;
+  padding-bottom: 10px;
+}
+
+.card-image {
+  width: 100%;
+}
+
+.post-card-focus {
   border: 1px solid black;
   border-radius: 5px;
   width: 80%;
   margin: 10px;
+  padding-bottom: 10px;
+}
+
+img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.comment-card {
+  border-radius: 5px;
+  background-color: antiquewhite;
+  width: 80%;
+  padding: 3px;
+  margin: 5px;
+}
+
+.add-comment {
+  width: 80%;
+}
+
+.comment-text {
+  background-color: white;
+  width: 80%;
+  min-height: 50px;
+}
+
+textarea {
+  width: 90%;
 }
 
 .center {
@@ -89,16 +134,21 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #5a5656;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #54694a;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.button-green {
+  background-color: #c4eeaf;
+  margin: 5px;
 }
 
 @media (prefers-color-scheme: light) {

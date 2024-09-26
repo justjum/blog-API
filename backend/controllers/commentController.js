@@ -11,6 +11,9 @@ exports.getAllComments = async function (req, res, next) {
       where: {
         postId: req.params.postId,
       },
+      include: {
+        author:true
+      }
     });
     if (!comments) {
       res.json({ msg: "No comments" });
@@ -48,7 +51,7 @@ exports.postComment = async function (req, res, next) {
     });
     res.json(comment);
   } catch (err) {
-    res.status(500).send("Error creating commment.");
+    res.status(500).send(`Error creating commment. ${err}`);
   }
 };
 

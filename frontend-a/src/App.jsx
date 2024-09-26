@@ -40,7 +40,11 @@ function App() {
         useSignUpPopup={useSignUpPopup}
         setAlertMessage={setAlertMessage}
       />
-      <Home handleLogin={handleLogin} />
+      <Home
+        handleLogin={handleLogin}
+        setAlertMessage={setAlertMessage}
+        isLoggedIn={isLoggedIn}
+      />
       <SignUp
         useSignUpPopup={useSignUpPopup}
         displaySignUp={displaySignUp}

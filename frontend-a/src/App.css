@@ -11,6 +11,11 @@
   margin-right: auto;
 }
 
+.right {
+  text-align: right;
+  margin-right: 10px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -46,5 +51,3 @@
 .read-the-docs {
   color: #888;
 }
-
-
