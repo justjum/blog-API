@@ -54,6 +54,10 @@ section {
   flex-wrap: wrap;
 }
 
+.focusPost {
+  flex-direction: column;
+}
+
 .post-card {
   border: 1px solid black;
   border-radius: 5px;
@@ -64,6 +68,10 @@ section {
 
 .card-image {
   width: 100%;
+}
+
+.card-body {
+  min-height: 100px;
 }
 
 .post-card-focus {
@@ -81,10 +89,10 @@ img {
 
 .comment-card {
   border-radius: 5px;
-  background-color: antiquewhite;
+  background-color: rgb(245, 239, 232);
   width: 80%;
   padding: 3px;
-  margin: 5px;
+  margin: 10px;
 }
 
 .add-comment {
@@ -94,7 +102,8 @@ img {
 .comment-text {
   background-color: white;
   width: 80%;
-  min-height: 50px;
+  min-height: 100px;
+  padding: 10px;
 }
 
 textarea {
@@ -104,6 +113,10 @@ textarea {
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+
+.smfont {
+  font-size: smaller;
 }
 
 a {

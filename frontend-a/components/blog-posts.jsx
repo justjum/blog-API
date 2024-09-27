@@ -55,10 +55,16 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
 
   return (
     <>
-      <section id="blogPosts" className="center">
+      <section
+        id="blogPosts"
+        className={focusPost != null ? "focusPost" : "center"}
+      >
         {posts ? (
           focusPost ? (
             <>
+              <button className="formInput right" onClick={handleClosePost}>
+                Back
+              </button>
               <div className="post-card-focus center" key={focusPost.id}>
                 <div className="card-title">
                   <h2>{focusPost.title}</h2>
@@ -69,15 +75,21 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
                 <div className="card-body">
                   <p>{focusPost.text}</p>
                 </div>
+                <hr />
+                <h3>Comments</h3>
                 <div className="card-comments">
                   {comments
                     ? comments.map((comment) => {
                         console.log(comment);
                         return (
                           <div className="comment-card center">
-                            <p className="comment-text">{comment.text}</p>
-                            <p className="right">{comment.author.username}</p>
-                            <p className="right">
+                            <p className="comment-text center">
+                              {comment.text}
+                            </p>
+                            <p className="right smfont">
+                              {comment.author.username}
+                            </p>
+                            <p className="right smfont">
                               {dateFormat(comment.createdAt)}
                             </p>
                           </div>
