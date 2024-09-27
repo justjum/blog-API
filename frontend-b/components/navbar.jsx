@@ -2,11 +2,10 @@ import { useState } from "react";
 import Login from "./login";
 import Logout from "./logout";
 
-function Navbar( {handleLogin, isLoggedIn }) {
+function Navbar( {handleLogin, isLoggedIn, setAlertMessage }) {
     return <>
-    <div>
-        {isLoggedIn ? <Logout handleLogin={handleLogin}/>:<Login handleLogin={handleLogin}/>}
-        
+    <div className="navbar">
+        {isLoggedIn ? <Logout handleLogin={handleLogin}/>:<Login handleLogin={handleLogin} setAlertMessage={setAlertMessage}/>}
     </div>
     </>
 }

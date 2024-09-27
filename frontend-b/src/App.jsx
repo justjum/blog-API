@@ -20,18 +20,19 @@ function App() {
       handleLogin(false);
     } else {
       handleLogin(true);
+      console.log("Cool magool")
     }
   }, [localStorage]);
 
-  function handleLogin() {
-    setIsLoggedIn(!isLoggedIn);
+  function handleLogin(e) {
+    setIsLoggedIn(e);
   }
 
    
 
   return (
     <>
-      <Navbar handleLogin={handleLogin}/>
+      <Navbar handleLogin={handleLogin} isLoggedIn={isLoggedIn} setAlertMessage={setAlertMessage}/>
       <Home setAlertMessage={setAlertMessage} setDisplaySignUp={setDisplaySignUp} handleLogin={handleLogin}/> 
       <SignUp setAlertMessage={setAlertMessage} displaySignUp={displaySignUp}/>
       <Alert alertMessage={alertMessage} />

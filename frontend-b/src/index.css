@@ -25,9 +25,28 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
+}
+
+.navbar {
+  height: 100vh;
+  max-width: 250px;
+  margin-right: 0;
+  display: flex;
+  border-right:2px solid#213547;
+  justify-content: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  padding: 10px;
+  margin:5px;
 }
 
 h1 {
@@ -45,6 +64,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  height: fit-content;
 }
 button:hover {
   border-color: #646cff;

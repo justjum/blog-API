@@ -68,10 +68,11 @@ export default function Login({ handleLogin, setAlertMessage }) {
             className="formInput"
           />
           <button type="submit">Login</button>
-        </form>
-        <a href="" onClick={handleSignUpClick}>
+          <a href="" onClick={handleSignUpClick}>
           (Login or Sign Up to Manage Posts)
-        </a>
+          </a>
+        </form>
+
       </div>
     </>
   );

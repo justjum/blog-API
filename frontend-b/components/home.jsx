@@ -1,4 +1,4 @@
-import Navbar from "./navbar";
+
 
 function Home({handleLogin}) {
     return <>
