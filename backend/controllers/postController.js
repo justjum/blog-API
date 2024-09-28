@@ -20,7 +20,11 @@ exports.getPost = async function (req, res, next) {
 };
 
 exports.getAllPosts = async function (req, res, next) {
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany(
+    {include: {
+      author:true
+    }}
+  );
   res.json(posts);
 };
 

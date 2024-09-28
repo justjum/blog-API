@@ -33,10 +33,11 @@ body {
 .navbar {
   height: 100vh;
   max-width: 250px;
-  margin-right: 0;
+  width: auto;
   display: flex;
   border-right:2px solid#213547;
   justify-content: center;
+  flex: 1;
 }
 
 .loginForm {
@@ -48,6 +49,21 @@ body {
   padding: 10px;
   margin:5px;
 }
+
+
+.content {
+  width: 100%;
+  flex: 1;
+}
+
+.postsTable {
+  width: 100%;
+}
+
+td {
+  padding: 5px;
+}
+
 
 h1 {
   font-size: 3.2em;
@@ -84,5 +100,17 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+
+@media (max-width: 600px) {
+  #root {
+    flex-direction: column;
+    width: auth;
+  }
+  .navbar {
+    max-width: 100%;
+    height: auto;
   }
 }

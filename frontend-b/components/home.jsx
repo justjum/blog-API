@@ -1,8 +1,11 @@
+import BlogPosts from "./blog-posts";
 
-
-function Home({handleLogin}) {
+function Home({handleLogin, isLoggedIn}) {
     return <>
-    <p>Content</p>
+        <section className="content">
+            <h2>Blog Posts</h2>
+            <BlogPosts isLoggedIn={isLoggedIn}/>
+        </section>
     </>
 }
 

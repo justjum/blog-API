@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Navbar handleLogin={handleLogin} isLoggedIn={isLoggedIn} setAlertMessage={setAlertMessage}/>
-      <Home setAlertMessage={setAlertMessage} setDisplaySignUp={setDisplaySignUp} handleLogin={handleLogin}/> 
+      <Home setAlertMessage={setAlertMessage} setDisplaySignUp={setDisplaySignUp} handleLogin={handleLogin} isLoggedIn={isLoggedIn}/> 
       <SignUp setAlertMessage={setAlertMessage} displaySignUp={displaySignUp}/>
       <Alert alertMessage={alertMessage} />
     </>
