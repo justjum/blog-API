@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import dateFormat from "dateformat";
+import Post from './post'
 
 export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
-  const [comments, setComments] = useState(null);
-  const [addComment, setAddComment] = useState(false);
+  const [newPost, setNewPost] = useState(false);
+  const [focusPost, setFocusPost] = useState("");
 
-  let requestOptions = {
+  const requestOptions = {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +47,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
               <tbody>
               {posts.map((post) => {
                 return <>
-                  <tr key={post.id}>
+                  <tr key={post.id} onClick={()=>{setFocusPost(post)}} className="hover">
                     <td>{post.title}</td>
                     <td>{post.author.username}</td>
                     <td>{dateFormat(post.createdAt)}</td>
@@ -62,6 +63,9 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
           <p>Log in to access Blog Backend</p>
         )}
       </section>
+      <hr />
+      <button >New Post</button>
+      <Post newPost={newPost} focusPost={focusPost} />
     </>
   );
 }
