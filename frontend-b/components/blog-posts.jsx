@@ -6,6 +6,8 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
   const [focusPost, setFocusPost] = useState("");
+  const [postForm, setPostForm] = useState(false);
+
 
   const requestOptions = {
     method: "get",
@@ -25,6 +27,18 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
       })
     );
   }, []);
+
+  function handleNewPost() {
+    setFocusPost(false);
+    setNewPost(true);
+    setPostForm(true);
+  }
+
+  function handleUpdatePost(post) {
+    setFocusPost(post)
+    setNewPost(false);
+    setPostForm(true);
+  }
 
 
   return (
@@ -47,7 +61,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
               <tbody>
               {posts.map((post) => {
                 return <>
-                  <tr key={post.id} onClick={()=>{setFocusPost(post)}} className="hover">
+                  <tr key={post.id} onClick={()=>{handleUpdatePost(post)}} className="hover">
                     <td>{post.title}</td>
                     <td>{post.author.username}</td>
                     <td>{dateFormat(post.createdAt)}</td>
@@ -64,8 +78,8 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
         )}
       </section>
       <hr />
-      <button >New Post</button>
-      <Post newPost={newPost} focusPost={focusPost} />
+      <button onClick={handleNewPost}>New Post</button>
+      {postForm ? <Post newPost={newPost} focusPost={focusPost} setAlertMessage={setAlertMessage}/>:""}
     </>
   );
 }

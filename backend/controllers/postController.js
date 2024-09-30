@@ -50,11 +50,11 @@ exports.postPost = [
           published: req.body.published
         },
       });
-      res.json({
-        msg: "Post Created",
-      });
+        res.json({ msg: "Post updated" });
     } catch (err) {
-      return next(err);
+      res.status(500).json({ error: "Error creating post.",
+        err:err
+       });
     }
   },
 ];
