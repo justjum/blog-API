@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function Post( {newPost, focusPost, setAlertMessage}) {
+function Post( {newPost, focusPost, setAlertMessage, setPostForm}) {
     const [id, setId] = useState("")
     const [title, setTitle] = useState("");
     const [keyword, setKeyword] = useState([]);
@@ -8,11 +8,17 @@ function Post( {newPost, focusPost, setAlertMessage}) {
     const [image, setImage] = useState("");
     const [imageThumb, setImageThumb] = useState("");
     const [published, setPublished] = useState("");
+    const [checked, setChecked] = useState("");
 
     const handleClose = (e) => {
-        const dialog = document.getElementById("post-dialog");
-        dialog.close();
-      };
+      setPostForm(false)
+      const dialog = document.getElementById("post-dialog");
+      dialog.close();
+    };
+
+    const handleCheck = () => {
+      setPublished(!published)
+    }
 
     useEffect(() => {
         const dialog = document.getElementById("post-dialog");
@@ -35,7 +41,7 @@ function Post( {newPost, focusPost, setAlertMessage}) {
                 setText("");
                 setImage("");
                 setImageThumb("");
-                setPublished("");
+                setPublished(false);
             }
         }, [focusPost]);
 
@@ -94,7 +100,7 @@ function Post( {newPost, focusPost, setAlertMessage}) {
                 <input type="text" className="formInput" name="imageThumb" placeholder={newPost ? 'Link...':""} value={imageThumb} onChange={(e) =>setImageThumb(e.target.value)} />
                 <label htmlFor=""><strong>Published:</strong></label>
                 <label className="switch" >
-                    <input type="checkbox" />
+                    <input type="checkbox" onChange={handleCheck} checked={published}/>
                     <span className="slider round"></span>
                 </label>
                 <button onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>

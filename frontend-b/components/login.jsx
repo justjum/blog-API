@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Alert from "../components/alert";
 
 export default function Login({ handleLogin, setAlertMessage }) {
   const [username, setUsername] = useState("");

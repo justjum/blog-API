@@ -15,7 +15,7 @@
 
 a {
   font-weight: 500;
-  color: rgb(220, 230, 226);
+  color: rgb(64, 141, 110);
   text-decoration: inherit;
 }
 a:hover {
@@ -103,7 +103,7 @@ input:checked + .slider:before {
 
 .navbar {
   height: 100vh;
-  max-width: 250px;
+  max-width: fit-content;
   width: auto;
   display: flex;
   border-right:2px solid#213547;

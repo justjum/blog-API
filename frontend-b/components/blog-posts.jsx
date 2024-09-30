@@ -18,15 +18,15 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
     mode: "cors",
   };
 
+
+
   useEffect(() => {
     fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
       response.json().then((data) => {
-        console.log(data);
         setPosts(data);
-        console.log(posts);
       })
     );
-  }, []);
+  }, [postForm]);
 
   function handleNewPost() {
     setFocusPost(false);
@@ -48,7 +48,8 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
         className="center"
       >
         {
-          isLoggedIn ? (posts ? (
+          isLoggedIn ? (posts ? ( <>
+            <button onClick={handleNewPost}>New Post</button>
             <table className="postsTable">
               <thead>
                 <tr>
@@ -72,14 +73,18 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
               </tbody>
 
             </table>
+            <hr />
+            
+            {postForm ? <Post newPost={newPost} focusPost={focusPost} setAlertMessage={setAlertMessage} setPostForm={setPostForm}/>:""}
+          </>
+
         ) : "") :
         (
           <p>Log in to access Blog Backend</p>
         )}
+
       </section>
-      <hr />
-      <button onClick={handleNewPost}>New Post</button>
-      {postForm ? <Post newPost={newPost} focusPost={focusPost} setAlertMessage={setAlertMessage}/>:""}
+
     </>
   );
 }

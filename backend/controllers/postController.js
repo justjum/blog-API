@@ -38,6 +38,8 @@ exports.postPost = [
     if (!errors.isEmpty()) {
       res.error(errors);
     }
+    console.log(req.body)
+    console.log(req.userId)
 
     try {
       await prisma.post.create({
@@ -68,7 +70,7 @@ exports.updatePost = async function (req, res, next) {
   });
 
   if (!user.isAuthor) {
-    res.status(401).send("This area is not for you.");
+    res.status(401).send({error:"Update of post limited to authors."});
   } else {
     try {
       await prisma.post.update({
@@ -79,6 +81,7 @@ exports.updatePost = async function (req, res, next) {
           title: req.body.title,
           keyword: req.body.keyword,
           text: req.body.text,
+          published: req.body.published
         },
       });
       res.json({ msg: "Post updated" });

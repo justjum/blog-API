@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 export default function Alert({alertMessage}) {
-    const [alertTitle, setAlertTitle] = useState("Oh my.");
 
     const handleClose = (e) => {
         const dialog = document.getElementById("alert-dialog");
         e.preventDefault();
         dialog.close();
     };
+
+    console.log(alertMessage)
   
     return (
       <>
@@ -16,7 +17,7 @@ export default function Alert({alertMessage}) {
           style={{ backgroundColor: "rgb(238, 187, 187)" }}
         >
           <div className="modalTitle">
-            <h3>{alertTitle}</h3>
+            <h3>{alertMessage.msg ? "Ok!":"Oh my."}</h3>
           </div>
           <div className="modalBody">
             {Array.isArray(alertMessage) ? alertMessage.map((message) => {
