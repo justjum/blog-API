@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function Post( {newPost, focusPost, setAlertMessage, setPostForm}) {
+function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType}) {
     const [id, setId] = useState("")
     const [title, setTitle] = useState("");
     const [keyword, setKeyword] = useState([]);
@@ -70,6 +70,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm}) {
                 response.json().then((data) => {
                   const alertDialog = document.getElementById("alert-dialog");
                   console.log(data);
+                  setAlertType(data.alert);
                   if (data.error) {
                     console.log(data.error);
                     setAlertMessage(data.error);

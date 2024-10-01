@@ -10,6 +10,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displaySignUp, setDisplaySignUp] = useState(false)
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState(true);
 
   // Check Authentication
   useEffect(() => {
@@ -33,9 +34,9 @@ function App() {
   return (
     <>
       <Navbar handleLogin={handleLogin} isLoggedIn={isLoggedIn} setAlertMessage={setAlertMessage}/>
-      <Home setAlertMessage={setAlertMessage} setDisplaySignUp={setDisplaySignUp} handleLogin={handleLogin} isLoggedIn={isLoggedIn}/> 
+      <Home setAlertMessage={setAlertMessage} setDisplaySignUp={setDisplaySignUp} handleLogin={handleLogin} isLoggedIn={isLoggedIn} setAlertType={setAlertType}/> 
       <SignUp setAlertMessage={setAlertMessage} displaySignUp={displaySignUp}/>
-      <Alert alertMessage={alertMessage} />
+      <Alert alertMessage={alertMessage} alertType={alertType}/>
     </>
   )
 }

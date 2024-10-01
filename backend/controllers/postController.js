@@ -70,7 +70,7 @@ exports.updatePost = async function (req, res, next) {
   });
 
   if (!user.isAuthor) {
-    res.status(401).send({error:"Update of post limited to authors."});
+    res.status(401).send({error:"Update of post limited to authors.", alert: true});
   } else {
     try {
       await prisma.post.update({
@@ -84,9 +84,9 @@ exports.updatePost = async function (req, res, next) {
           published: req.body.published
         },
       });
-      res.json({ msg: "Post updated" });
+      res.json({ msg: "Post updated", alert: false });
     } catch (err) {
-      res.status(500).json({ error: "Error updating post." });
+      res.status(500).json({ error: "Error updating post.", alert: true });
     }
   }
 };
@@ -101,7 +101,7 @@ exports.deletePost = async function (req, res, next) {
     });
     res.json({ msg: "Post Deleted" });
   } catch (err) {
-    res.status(500).json({ error: "Error deleting post" });
+    res.status(500).json({ error: "Error deleting post", alert: true });
   }
 };
 
