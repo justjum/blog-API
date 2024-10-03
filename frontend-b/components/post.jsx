@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import UploadWidget from './uploadWidget';
 
 function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType}) {
     const [id, setId] = useState("")
@@ -17,10 +18,6 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
 
     const handleCheck = () => {
       setPublished(!published)
-    }
-
-    function handleChangeImage(e) {
-      e.preventDefault();
     }
 
     useEffect(() => {
@@ -103,7 +100,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                 <a type="text" className="formInput" name="image" href={image} >
                   {image}
                 </a>
-                <button className="postButton" onClick={handleChangeImage} >{image ? "Change":"Upload"} Image</button>
+                <UploadWidget image={image}/>
                 <label htmlFor=""><strong>Published:</strong></label>
                 <label className="switch" >
                     <input type="checkbox" onChange={handleCheck} checked={published}/>
@@ -112,6 +109,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                 <button className="postButton" onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
             </form>
         </dialog>
+        
     </>
 }
 
