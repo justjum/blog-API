@@ -44,6 +44,7 @@ label {
   display: inline-block;
   width: 60px;
   height: 34px;
+  z-index: 5;
 }
 
 /* Hide default HTML checkbox */
@@ -141,6 +142,10 @@ input:checked + .slider:before {
   width: 80%;
 }
 
+.postImageThumb {
+  max-width: 400px;
+}
+
 .hover {
   cursor: pointer;
   
@@ -171,6 +176,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   height: fit-content;
+  width: fit-content;
 }
 button:hover {
   border-color: rgb(174, 204, 192);
@@ -179,6 +185,10 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.postButton {
+  align-self: center;
 }
 
 @media (prefers-color-scheme: light) {

@@ -12,6 +12,8 @@ router.post("/", verifyToken, postController.postPost);
 
 router.put("/:postId", verifyToken, postController.updatePost);
 
+router.put("/:postId/isPublished", verifyToken, postController.isPublished);
+
 router.delete("/:postId", verifyToken, postController.deletePost);
 
 router.get("/:postId/comment", commentController.getAllComments);

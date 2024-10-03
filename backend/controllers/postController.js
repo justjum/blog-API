@@ -91,6 +91,36 @@ exports.updatePost = async function (req, res, next) {
   }
 };
 
+exports.isPublished = async function (req, res, next) {
+  console.log(req.body)
+  const user = await prisma.user.findFirst({
+    where: {
+      id: req.userId,
+    },
+  });
+
+  if (!user.isAuthor) {
+    res.status(401).send({error:"Update of post limited to authors.", alert: true});
+  } else {
+    try {
+      const post = await prisma.post.findFirst({
+        where: { id: req.body.id}
+      })
+      await prisma.post.update({
+        where: {
+          id: req.body.id,
+        },
+        data: {
+          published: !post.published
+        },
+      });
+      res.json({ msg: "Post updated", alert: false, published: !post.published });
+    } catch (err) {
+      res.status(500).json({ error: "Error updating post.", alert: true, err:err });
+    }
+  }
+};
+
 exports.deletePost = async function (req, res, next) {
   try {
     await prisma.post.delete({

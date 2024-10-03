@@ -8,7 +8,6 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
     const [image, setImage] = useState("");
     const [imageThumb, setImageThumb] = useState("");
     const [published, setPublished] = useState("");
-    const [checked, setChecked] = useState("");
 
     const handleClose = (e) => {
       setPostForm(false)
@@ -18,6 +17,10 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
 
     const handleCheck = () => {
       setPublished(!published)
+    }
+
+    function handleChangeImage(e) {
+      e.preventDefault();
     }
 
     useEffect(() => {
@@ -96,15 +99,17 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                 <label htmlFor="postText"><strong>Text:</strong></label>
                 <textarea name="postText" id="postText" className="formInput" placeholder={newPost ? 'Type text here...':""} value={text} onChange={(e)=>setText(e.target.value)}></textarea>
                 <label htmlFor="image"><strong>Image:</strong></label>
-                <input type="text" className="formInput" name="image" placeholder={newPost ? 'Link...':""} value={image} onChange={(e)=>setImage(e.target.value)} />
-                <label htmlFor="imageThumb"><strong>Image Thumbnail:</strong></label>
-                <input type="text" className="formInput" name="imageThumb" placeholder={newPost ? 'Link...':""} value={imageThumb} onChange={(e) =>setImageThumb(e.target.value)} />
+                <img className='postImageThumb center' src={image} alt="" />
+                <a type="text" className="formInput" name="image" href={image} >
+                  {image}
+                </a>
+                <button className="postButton" onClick={handleChangeImage} >{image ? "Change":"Upload"} Image</button>
                 <label htmlFor=""><strong>Published:</strong></label>
                 <label className="switch" >
                     <input type="checkbox" onChange={handleCheck} checked={published}/>
                     <span className="slider round"></span>
                 </label>
-                <button onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
+                <button className="postButton" onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
             </form>
         </dialog>
     </>
