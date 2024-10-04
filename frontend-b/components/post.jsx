@@ -16,6 +16,10 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
       dialog.close();
     };
 
+    const handleOpen = () => {
+      set
+    }
+
     const handleCheck = () => {
       setPublished(!published)
     }
@@ -100,7 +104,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                 <a type="text" className="formInput" name="image" href={image} >
                   {image}
                 </a>
-                <UploadWidget image={image}/>
+                <UploadWidget image={image} setImage={setImage} setImageThumb={setImageThumb} />
                 <label htmlFor=""><strong>Published:</strong></label>
                 <label className="switch" >
                     <input type="checkbox" onChange={handleCheck} checked={published}/>

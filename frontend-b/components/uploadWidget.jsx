@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react';
 
 
-const UploadWidget = ({image}) => {
+const UploadWidget = ({image, setImage, setImageThumb }) => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
     useEffect(() => {
@@ -13,9 +13,11 @@ const UploadWidget = ({image}) => {
         }, function(error, result){
             console.log(result)
             if (result.event == 'success') {
-                console.log('success')
-                console.log(result.info.url)
-                console.log(result.info.thumbnail_url)
+                let url = result.info.url;
+                setImage(url)
+                let urlThumb = url.split("upload/")
+                urlThumb = urlThumb[0]+'upload/t_Music%20Store%20Image/'+urlThumb[1]
+                setImageThumb(urlThumb)
             }
         });
     },[]);
