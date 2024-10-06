@@ -81,7 +81,9 @@ exports.updatePost = async function (req, res, next) {
           title: req.body.title,
           keyword: req.body.keyword,
           text: req.body.text,
-          published: req.body.published
+          published: req.body.published,
+          image: req.body.image,
+          imageThumb: req.body.imageThumb
         },
       });
       res.json({ msg: "Post updated", alert: false });

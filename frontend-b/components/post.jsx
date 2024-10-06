@@ -16,9 +16,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
       dialog.close();
     };
 
-    const handleOpen = () => {
-      set
-    }
+
 
     const handleCheck = () => {
       setPublished(!published)
@@ -26,7 +24,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
 
     useEffect(() => {
         const dialog = document.getElementById("post-dialog");
-        dialog.showModal();
+        dialog.show();
       }, [focusPost])
 
     useEffect(() => {

@@ -84,6 +84,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType}) 
           isLoggedIn ? (posts ? ( <>
             <button onClick={handleNewPost}>New Post</button>
             <hr />
+            {postForm ? <Post newPost={newPost} focusPost={focusPost} setAlertMessage={setAlertMessage} setPostForm={setPostForm} setAlertType={setAlertType}/>:""}
             <table className="postsTable">
               <thead>
                 <tr>
@@ -114,7 +115,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType}) 
             </table>
             <hr />
             
-            {postForm ? <Post newPost={newPost} focusPost={focusPost} setAlertMessage={setAlertMessage} setPostForm={setPostForm} setAlertType={setAlertType}/>:""}
+            
           </>
 
         ) : "") :
