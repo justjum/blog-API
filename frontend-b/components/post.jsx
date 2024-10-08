@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import UploadWidget from './uploadWidget';
+import Comments from './comments'
 
 function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType}) {
     const [id, setId] = useState("")
@@ -16,10 +17,14 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
       dialog.close();
     };
 
-
-
     const handleCheck = () => {
       setPublished(!published)
+    }
+
+    const handleComments = (e) => {
+      e.preventDefault()
+      const dialog = document.getElementById("comment-dialog");
+      dialog.showModal();
     }
 
     useEffect(() => {
@@ -108,9 +113,11 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                     <input type="checkbox" onChange={handleCheck} checked={published}/>
                     <span className="slider round"></span>
                 </label>
+                <button onClick={handleComments}>Comments</button>
                 <button className="postButton" onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
             </form>
         </dialog>
+        <Comments postId={id}/>
         
     </>
 }
