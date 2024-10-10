@@ -77,9 +77,9 @@ exports.updateComment = async function (req, res, next) {
         text: req.body.text,
       },
     });
-    res.send("Comment Updated");
+    res.json({ msg: "Comment updated", alert: false });
   } catch (err) {
-    res.status(500).send("Could not update comment.");
+    res.status(500).json({ error: "Error updating comment.", alert: true });
   }
 };
 
@@ -91,7 +91,7 @@ exports.deleteComment = async function (req, res, next) {
   });
 
   if (!user.isAuthor) {
-    res.status(401).send("Sorry, you can't do that.");
+    res.status(401).json({error: "Sorry, you can't do that.", alert: true});
   }
 
   try {
@@ -100,9 +100,9 @@ exports.deleteComment = async function (req, res, next) {
         id: req.params.commentId,
       },
     });
-    res.send("Comment Deleted");
+    res.json({ msg: "Comment deleted", alert: false });
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json({ error: "Error deleting comment.", alert: true });
   }
 };
 

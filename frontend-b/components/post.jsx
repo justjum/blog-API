@@ -117,7 +117,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                 <button className="postButton" onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
             </form>
         </dialog>
-        <Comments postId={id}/>
+        <Comments postId={id} setPostId={setId}/>
         
     </>
 }

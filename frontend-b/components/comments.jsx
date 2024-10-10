@@ -1,8 +1,9 @@
 import { useState, useEffect} from "react";
 import Delete from '../public/delete-outline.svg'
 
-function Comments({postId}) {
-    const [comments, setComments] = useState(undefined);
+function Comments({postId, setPostId}) {
+    const [comments, setComments] = useState(null);
+    const [deleteId, setDeleteId] = useState(null);
 
     function handleClose(e) {
         const dialog = document.getElementById("comment-dialog");
@@ -10,28 +11,40 @@ function Comments({postId}) {
         dialog.close();
     }
 
-    let requestOptions = {
-        method: "get",
+    function handleDelete(e) {
+        setDeleteId('/'+e.target.id);  
+        
+    }
+
+    const url = `//127.0.0.1:3000/post/${postId}/comment`;
+
+    const requestOptions = {
+        method: deleteId? 'delete':'get',
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.accessToken,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         mode: "cors",
       };
 
     useEffect(() => {
     fetch(
-            `//127.0.0.1:3000/post/${postId}/comment`,
+            deleteId ? url+deleteId:url,
             requestOptions
         ).then((response) =>
-            response.json().then((data) => {
-                console.log(data);
-                setComments(data);
-                console.log(comments);
+            response.json()
+        .then((data) => {
+                if (!data.msg) {
+                    setComments(data)
+                } else {
+                    setDeleteId(null);
+                    setPostId(postId);
+                }
+                    
             })
             
         )
-    }, [postId]);
+    }, [postId, deleteId]);
     
     return <>
         <dialog className='comment-dialog' id="comment-dialog">
@@ -42,7 +55,7 @@ function Comments({postId}) {
                 <h3>Post Comments</h3>
             </div>
             <div className='modalBody'>
-            {Array.isArray(comments) ? (<table>
+            {Array.isArray(comments) ? (<table className="commentTable center">
                 <thead>
                     <tr>
                         <th>Comment</th>
@@ -53,10 +66,10 @@ function Comments({postId}) {
                 <tbody>
                     {comments.map((comment)=> {
                         return <>
-                            <tr>
-                                <td>{comment.text}</td>
+                            <tr className="hover" key={comment.id}>
+                                <td style={{textAlign:"left"}}>{comment.text}</td>
                                 <td>{comment.author.username}</td>
-                                <td><img src={Delete} alt="delete comment" /></td>
+                                <td><button onClick={handleDelete}><img className='icon' src={Delete} alt="delete comment" id={comment.id}/></button></td>
                             </tr>
                         </>
                     })}

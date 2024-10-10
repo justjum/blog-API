@@ -134,12 +134,28 @@ input:checked + .slider:before {
   flex: 1;
 }
 
+th,td {
+  border-bottom: 1px solid rgb(243, 237, 237);
+}
+
 .postsTable {
   width: 100%;
 }
 
 .post-dialog {
   width: 80%;
+}
+
+.comment-dialog {
+  width:60%;
+}
+
+.commentTable {
+  width: 80%;
+}
+
+.icon{
+  width: 40px;
 }
 
 .postImageThumb {
