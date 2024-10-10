@@ -1,14 +1,46 @@
 import { useState } from "react";
 
-export default function Alert({alertMessage, alertType}) {
+export default function Alert({alertMessage, alertType, deleteConfirm, setDeleteConfirm}) {
 
     const handleClose = (e) => {
         const dialog = document.getElementById("alert-dialog");
+        deleteConfirm ? setDeleteConfirm(false):"";
         e.preventDefault();
         dialog.close();
     };
 
-    console.log(alertType)
+    const handleConfirm = (e) => {
+      const dialog = document.getElementById("alert-dialog");
+      const id = localStorage.getItem('deleteId');
+      setDeleteConfirm(false);
+      const requestOptions = {
+        method: 'delete',
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        mode: "cors",
+      };
+      fetch(
+        `//127.0.0.1:3000/post/${id}`,
+        requestOptions
+        ).then((response) =>
+        response.json()
+        .then((data) => {
+            if(data.msg) {
+              const dialog = document.getElementById("post-dialog");
+              dialog.close();
+            } else {
+              console.log(data.err)
+            }
+                
+        })
+        
+    )
+      dialog.close();
+    }
+
+    
   
     return (
       <>
@@ -26,9 +58,12 @@ export default function Alert({alertMessage, alertType}) {
                 <p>{message.msg}</p>
               )
             }):<p>{alertMessage}</p>}
-            
+            {deleteConfirm ? 
+              <button className="postButton" onClick={handleConfirm}>Confirm</button>
+              :
+              ""}
             <button type="submit" onClick={handleClose}>
-              Close
+              {deleteConfirm ? "Cancel" : "Close"}
             </button>
           </div>
         </dialog>

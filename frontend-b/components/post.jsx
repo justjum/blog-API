@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import UploadWidget from './uploadWidget';
 import Comments from './comments'
 
-function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType}) {
+function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType, setDeleteConfirm }) {
     const [id, setId] = useState("")
     const [title, setTitle] = useState("");
     const [keyword, setKeyword] = useState([]);
@@ -19,6 +19,17 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
 
     const handleCheck = () => {
       setPublished(!published)
+    }
+
+    const handleDelete = (e, id) => {
+      e.preventDefault();
+      console.log(id)
+      localStorage.setItem("deleteId", id);
+      setAlertMessage("Are you sure you want to delete this post?");
+      setAlertType(true);
+      setDeleteConfirm(true);
+      const alertDialog = document.getElementById("alert-dialog");
+      alertDialog.showModal(id);
     }
 
     const handleComments = (e) => {
@@ -103,18 +114,25 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType})
                 <label htmlFor="postText"><strong>Text:</strong></label>
                 <textarea name="postText" id="postText" className="formInput" placeholder={newPost ? 'Type text here...':""} value={text} onChange={(e)=>setText(e.target.value)}></textarea>
                 <label htmlFor="image"><strong>Image:</strong></label>
-                <img className='postImageThumb center' src={image} alt="" />
+                <div> 
+                  <img className='postImageThumb center' src={image} alt="" />
+                  <UploadWidget image={image} setImage={setImage} setImageThumb={setImageThumb} />
+                </div>
                 <a type="text" className="formInput" name="image" href={image} >
                   {image}
                 </a>
-                <UploadWidget image={image} setImage={setImage} setImageThumb={setImageThumb} />
+                
                 <label htmlFor=""><strong>Published:</strong></label>
                 <label className="switch" >
                     <input type="checkbox" onChange={handleCheck} checked={published}/>
                     <span className="slider round"></span>
                 </label>
-                <button onClick={handleComments}>Comments</button>
-                <button className="postButton" onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
+                <button className="postButton" onClick={handleComments}>Comments</button>
+                <div>
+                  <button className="postButton" onClick={handlePost}>{newPost ? "Save Post": "Update Post"}</button>
+                  <button className="postButton delete" onClick={newPost ? handleClose:() => handleDelete(event, id)}>{newPost ? "Cancel Post":"Delete Post"}</button>
+                </div>
+                
             </form>
         </dialog>
         <Comments postId={id} setPostId={setId}/>

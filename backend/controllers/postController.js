@@ -128,10 +128,10 @@ exports.deletePost = async function (req, res, next) {
     await prisma.post.delete({
       where: {
         userId: req.userId,
-        id: req.body.id,
+        id: req.params.postId,
       },
     });
-    res.json({ msg: "Post Deleted" });
+    res.status(200).json({ msg: "Post Deleted" });
   } catch (err) {
     res.status(500).json({ error: "Error deleting post", alert: true });
   }

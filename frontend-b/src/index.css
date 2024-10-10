@@ -205,6 +205,15 @@ button:focus-visible {
 
 .postButton {
   align-self: center;
+  margin: 10px;
+}
+
+.delete {
+  background-color: rgb(235, 201, 201);
+}
+
+.delete:hover {
+  background-color: rgb(235, 175, 175);
 }
 
 @media (prefers-color-scheme: light) {

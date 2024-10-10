@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import dateFormat from "dateformat";
 import Post from './post'
 
-export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType}) {
+export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType, setDeleteConfirm}) {
   const [posts, setPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
   const [focusPost, setFocusPost] = useState("");
@@ -84,7 +84,16 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType}) 
           isLoggedIn ? (posts ? ( <>
             <button onClick={handleNewPost}>New Post</button>
             <hr />
-            {postForm ? <Post newPost={newPost} focusPost={focusPost} setAlertMessage={setAlertMessage} setPostForm={setPostForm} setAlertType={setAlertType}/>:""}
+            {postForm ? 
+              <Post 
+                newPost={newPost} 
+                focusPost={focusPost} 
+                setAlertMessage={setAlertMessage} 
+                setPostForm={setPostForm} 
+                setAlertType={setAlertType} 
+                setDeleteConfirm={setDeleteConfirm}/>
+                :
+                ""}
             <table className="postsTable">
               <thead>
                 <tr>

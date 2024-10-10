@@ -11,6 +11,7 @@ function App() {
   const [displaySignUp, setDisplaySignUp] = useState(false)
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState(true);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   // Check Authentication
   useEffect(() => {
@@ -34,9 +35,16 @@ function App() {
   return (
     <>
       <Navbar handleLogin={handleLogin} isLoggedIn={isLoggedIn} setAlertMessage={setAlertMessage}/>
-      <Home setAlertMessage={setAlertMessage} setDisplaySignUp={setDisplaySignUp} handleLogin={handleLogin} isLoggedIn={isLoggedIn} setAlertType={setAlertType}/> 
+      <Home 
+        setAlertMessage={setAlertMessage} 
+        setDisplaySignUp={setDisplaySignUp} 
+        handleLogin={handleLogin} 
+        isLoggedIn={isLoggedIn} 
+        setAlertType={setAlertType} 
+        setDeleteConfirm={setDeleteConfirm}
+      /> 
       <SignUp setAlertMessage={setAlertMessage} displaySignUp={displaySignUp}/>
-      <Alert alertMessage={alertMessage} alertType={alertType}/>
+      <Alert alertMessage={alertMessage} alertType={alertType} deleteConfirm={deleteConfirm} setDeleteConfirm={setDeleteConfirm}/>
     </>
   )
 }
