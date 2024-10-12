@@ -40,23 +40,33 @@ exports.postPost = [
     }
     console.log(req.body)
     console.log(req.userId)
-
-    try {
-      await prisma.post.create({
-        data: {
-          userId: req.userId,
-          title: req.body.title,
-          keyword: req.body.keyword,
-          text: req.body.text,
-          image: req.body.image,
-          published: req.body.published
-        },
-      });
-        res.json({ msg: "Post updated" });
-    } catch (err) {
-      res.status(500).json({ error: "Error creating post.",
-        err:err
-       });
+    const user = await prisma.user.findFirst({
+      where: {
+        id: req.userId,
+      },
+    });
+  
+    if (!user.isAuthor) {
+      res.status(401).send({error:"Update of post limited to authors.", alert: true});
+    } else {
+      try {
+        await prisma.post.create({
+          data: {
+            userId: req.userId,
+            title: req.body.title,
+            keyword: req.body.keyword,
+            text: req.body.text,
+            image: req.body.image,
+            imageThumb: req.body.imageThumb,
+            published: req.body.published
+          },
+        });
+          res.json({ msg: "Post updated" });
+      } catch (err) {
+        res.status(500).json({ error: "Error creating post.",
+          err:err
+         });
+      }
     }
   },
 ];

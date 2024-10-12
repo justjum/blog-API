@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import dateFormat from "dateformat";
 import AddComment from "../components/add-comment";
+import KeywordFilter from "./keyword-filter";
 
 export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   const [posts, setPosts] = useState(null);
+  const [filteredPosts, setFilteredPosts] = useState(null);
   const [focusPost, setFocusPost] = useState(null);
   const [comments, setComments] = useState(null);
   const [addComment, setAddComment] = useState(false);
+  const [keyword, setKeyword] = useState(null);
 
   let requestOptions = {
     method: "get",
@@ -22,10 +25,21 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
       response.json().then((data) => {
         console.log(data);
         setPosts(data);
-        console.log(posts);
+        setFilteredPosts(data);
       })
     );
   }, []);
+
+  useEffect(() => {
+    if (keyword !== null) {
+      console.log(keyword);
+      setFilteredPosts(
+        posts.filter((post) => post.keyword.toString().includes(keyword))
+      );
+    }
+    console.table(posts);
+    console.table(filteredPosts);
+  }, [keyword]);
 
   useEffect(() => {
     focusPost
@@ -55,6 +69,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
 
   return (
     <>
+      {focusPost ? "" : <KeywordFilter setKeyword={setKeyword} />}
       <section
         id="blogPosts"
         className={focusPost != null ? "focusPost" : "center"}
@@ -120,7 +135,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
               </div>
             </>
           ) : (
-            posts.map((post) => {
+            filteredPosts.map((post) => {
               return post.published ? (
                 <div className="post-card center" key={post.id}>
                   <div className="card-image">
