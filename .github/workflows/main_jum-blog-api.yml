@@ -4,7 +4,6 @@
 name: Build and deploy Node.js app to Azure Web App - jum-blog-API
 defaults:
       run:
-      # Backend working directory
         working-directory: backend
 
 on:
