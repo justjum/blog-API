@@ -5,7 +5,7 @@ import Comments from './comments'
 function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType, setDeleteConfirm }) {
     const [id, setId] = useState("")
     const [title, setTitle] = useState("");
-    const [keyword, setKeyword] = useState([]);
+    const [keyword, setKeyword] = useState("");
     const [text, setText] = useState("");
     const [image, setImage] = useState("");
     const [imageThumb, setImageThumb] = useState("");
@@ -55,7 +55,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType, 
             } else {
                 setId("")
                 setTitle("");
-                setKeyword([]);
+                setKeyword("");
                 setText("");
                 setImage("");
                 setImageThumb("");
@@ -110,7 +110,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType, 
                 <label htmlFor="title"><strong>Title:</strong></label>
                 <input type="text" className="formInput" name="title" placeholder={newPost ? 'Title': ""} value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <label htmlFor="keywords"><strong>Keywords:</strong></label>
-                <input type="text" className="formInput" name="keywords" placeholder={newPost ? 'Keywords (comma seperated)': ""} value={keyword} onChange={(e) => setKeyword([e.target.value])}/>
+                <input type="text" className="formInput" name="keywords" placeholder={newPost ? 'Keywords (comma seperated)': ""} value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
                 <label htmlFor="postText"><strong>Text:</strong></label>
                 <textarea name="postText" id="postText" className="formInput" placeholder={newPost ? 'Type text here...':""} value={text} onChange={(e)=>setText(e.target.value)}></textarea>
                 <label htmlFor="image"><strong>Image:</strong></label>

@@ -54,7 +54,7 @@ exports.postPost = [
           data: {
             userId: req.userId,
             title: req.body.title,
-            keyword: req.body.keyword,
+            keyword: req.body.keyword.split(/[ ,]+/),
             text: req.body.text,
             image: req.body.image,
             imageThumb: req.body.imageThumb,
@@ -89,7 +89,7 @@ exports.updatePost = async function (req, res, next) {
         },
         data: {
           title: req.body.title,
-          keyword: req.body.keyword,
+          keyword: req.body.keyword.split(/[ ,]+/),
           text: req.body.text,
           published: req.body.published,
           image: req.body.image,

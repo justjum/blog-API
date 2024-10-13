@@ -104,7 +104,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType, s
                 </tr>
               </thead>
               <tbody>
-              {posts.map((post) => {
+              {posts ? posts.map((post) => {
                 return <>
                   <tr key={post.id} className="hover">
                     <td onClick={()=>{handleUpdatePost(post)}}>{post.title}</td>
@@ -118,7 +118,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType, s
                     </td>
                   </tr>
                 </>
-              })}
+              }):""}
               </tbody>
 
             </table>

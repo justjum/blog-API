@@ -100,7 +100,7 @@ exports.indexSignup = [
               password: hashedPassword,
             },
           });
-          res.status(200).json({msg:"Sign Up Successful"});
+          res.status(200).json({msg:"Sign Up Successful", alert:false});
         } catch (err) {
           res.status(500).json(err);
         }
