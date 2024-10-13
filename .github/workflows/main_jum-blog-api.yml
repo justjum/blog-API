@@ -12,6 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+      # Backend working directory
+        working-directory: backend
 
     steps:
       - uses: actions/checkout@v4
