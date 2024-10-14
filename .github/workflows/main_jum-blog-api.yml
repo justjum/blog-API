@@ -2,10 +2,6 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy Node.js app to Azure Web App - jum-blog-API
-defaults:
-      run:
-      # Backend working directory
-        working-directory: backend
 
 on:
   push:
@@ -16,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  
 
     steps:
       - uses: actions/checkout@v4
@@ -62,9 +57,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C7BB4037692B4060AED5D5FF2AA4B59F }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_5451384AB8394E879A0EDFF201BDF7A3 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E5DDE92DB7244F298EF40AA928CBD2F1 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7BD5675970004979B873EF82BF4BC035 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D1BDB8A594954D6EA184DC21C523E82F }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9009E80C61AC4CF3A5D25D8833EEB34E }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
