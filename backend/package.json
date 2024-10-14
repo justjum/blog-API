@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "build": "npx prisma generate",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=backend:* npm run devstart"
   },
