@@ -3,7 +3,11 @@ import dateFormat from "dateformat";
 import AddComment from "../components/add-comment";
 import KeywordFilter from "./keyword-filter";
 
-export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
+export default function BlogPosts({
+  setAlertMessage,
+  isLoggedIn,
+  setIsLoading,
+}) {
   const [posts, setPosts] = useState(null);
   const [filteredPosts, setFilteredPosts] = useState(null);
   const [focusPost, setFocusPost] = useState(null);
@@ -21,12 +25,14 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${import.meta.env.VITE_CONNECT}/post`, requestOptions).then(
       (response) =>
         response.json().then((data) => {
           console.log(data);
           setPosts(data);
           setFilteredPosts(data);
+          setIsLoading(false);
         })
     );
   }, []);

@@ -3,7 +3,8 @@ import Header from "../components/header";
 import Home from "../components/home";
 import SignUp from "../components/sign-up";
 import Alert from "../components/alert";
-import BlogPosts from "../components/blog-posts";
+import Loading from "../components/loading";
+import LinkHeader from "../components/linkHeader";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [displaySignUp, setDisplaySignUp] = useState(false);
   const [displayError, setDisplayError] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleLogin(e) {
     setIsLoggedIn(e);
@@ -34,6 +36,8 @@ function App() {
 
   return (
     <>
+      <LinkHeader />
+      {isLoading ? <Loading /> : ""}
       <Header
         isLoggedIn={isLoggedIn}
         handleLogin={handleLogin}
@@ -44,6 +48,7 @@ function App() {
         handleLogin={handleLogin}
         setAlertMessage={setAlertMessage}
         isLoggedIn={isLoggedIn}
+        setIsLoading={setIsLoading}
       />
       <SignUp
         useSignUpPopup={useSignUpPopup}

@@ -72,9 +72,13 @@ export default function Login({ handleLogin, setAlertMessage }) {
           />
           <button type="submit">Login</button>
         </form>
-        <a href="" onClick={handleSignUpClick}>
-          (Login or Sign Up to Comment)
-        </a>
+        <p>
+          (Login or&nbsp;
+          <a href="" onClick={handleSignUpClick}>
+            Sign Up
+          </a>
+          &nbsp;to Comment)
+        </p>
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { isExpired } from "react-jwt";
 import BlogPosts from "../components/blog-posts";
 
-function Home({ handleLogin, isLoggedIn, setAlertMessage }) {
+function Home({ handleLogin, isLoggedIn, setAlertMessage, setIsLoading }) {
   // Check Authentication
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -17,7 +17,11 @@ function Home({ handleLogin, isLoggedIn, setAlertMessage }) {
 
   return (
     <>
-      <BlogPosts setAlertMessage={setAlertMessage} isLoggedIn={isLoggedIn} />
+      <BlogPosts
+        setAlertMessage={setAlertMessage}
+        isLoggedIn={isLoggedIn}
+        setIsLoading={setIsLoading}
+      />
     </>
   );
 }
