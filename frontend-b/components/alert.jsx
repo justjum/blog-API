@@ -22,7 +22,7 @@ export default function Alert({alertMessage, alertType, deleteConfirm, setDelete
         mode: "cors",
       };
       fetch(
-        `//127.0.0.1:3000/post/${id}`,
+        `${import.meta.env.VITE_CONNECT}/post/${id}`,
         requestOptions
         ).then((response) =>
         response.json()

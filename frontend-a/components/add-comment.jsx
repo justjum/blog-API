@@ -22,18 +22,20 @@ export default function AddComment({ postId, setAlertMessage, setAddComment }) {
 
     console.log(requestOptions);
 
-    fetch(`//127.0.0.1:3000/post/${postId}/comment/`, requestOptions).then(
-      (response) =>
-        response.json().then((data) => {
-          console.log(data);
-          if (data.error) {
-            const alertDialog = document.getElementById("alert-dialog");
-            setAlertMessage(data.error);
-            alertDialog.showModal();
-          } else {
-            setAddComment(false);
-          }
-        })
+    fetch(
+      `${import.meta.env.VITE_CONNECT}/post/${postId}/comment/`,
+      requestOptions
+    ).then((response) =>
+      response.json().then((data) => {
+        console.log(data);
+        if (data.error) {
+          const alertDialog = document.getElementById("alert-dialog");
+          setAlertMessage(data.error);
+          alertDialog.showModal();
+        } else {
+          setAddComment(false);
+        }
+      })
     );
   };
 

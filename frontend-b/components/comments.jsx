@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import Delete from '../public/delete-outline.svg'
+import Delete from '../src/delete-outline.svg'
 
 function Comments({postId, setPostId}) {
     const [comments, setComments] = useState(null);
@@ -16,7 +16,7 @@ function Comments({postId, setPostId}) {
         
     }
 
-    const url = `//127.0.0.1:3000/post/${postId}/comment`;
+    const url = `${import.meta.env.VITE_CONNECT}/post/${postId}/comment`;
 
     const requestOptions = {
         method: deleteId? 'delete':'get',

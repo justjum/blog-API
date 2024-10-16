@@ -84,7 +84,7 @@ function Post( {newPost, focusPost, setAlertMessage, setPostForm, setAlertType, 
                 
               };
             
-              fetch(`//127.0.0.1:3000/post/${id}`, requestOptions).then((response) =>
+              fetch(`${import.meta.env.VITE_CONNECT}/post/${id}`, requestOptions).then((response) =>
                 response.json().then((data) => {
                   const alertDialog = document.getElementById("alert-dialog");
                   console.log(data);

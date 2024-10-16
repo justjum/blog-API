@@ -23,22 +23,23 @@ export default function Login({ handleLogin, setAlertMessage }) {
       mode: "cors",
     };
 
-    fetch("//127.0.0.1:3000/login", requestOptions).then((response) =>
-      response.json().then((data) => {
-        // Reset the login form
-        if (data.error) {
-          const alertDialog = document.getElementById("alert-dialog");
-          setAlertMessage(data.error);
-          alertDialog.showModal();
-        }
-        if (data.token) {
-          setUsername("");
-          setPassword("");
-          // Save token to local storage
-          localStorage.setItem("accessToken", data.token);
-          handleLogin(true);
-        }
-      })
+    fetch(`${import.meta.env.VITE_CONNECT}/login`, requestOptions).then(
+      (response) =>
+        response.json().then((data) => {
+          // Reset the login form
+          if (data.error) {
+            const alertDialog = document.getElementById("alert-dialog");
+            setAlertMessage(data.error);
+            alertDialog.showModal();
+          }
+          if (data.token) {
+            setUsername("");
+            setPassword("");
+            // Save token to local storage
+            localStorage.setItem("accessToken", data.token);
+            handleLogin(true);
+          }
+        })
     );
   };
 

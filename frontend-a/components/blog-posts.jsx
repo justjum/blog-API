@@ -21,12 +21,13 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   };
 
   useEffect(() => {
-    fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
-      response.json().then((data) => {
-        console.log(data);
-        setPosts(data);
-        setFilteredPosts(data);
-      })
+    fetch(`${import.meta.env.VITE_CONNECT}/post`, requestOptions).then(
+      (response) =>
+        response.json().then((data) => {
+          console.log(data);
+          setPosts(data);
+          setFilteredPosts(data);
+        })
     );
   }, []);
 
@@ -44,7 +45,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn }) {
   useEffect(() => {
     focusPost
       ? fetch(
-          `//127.0.0.1:3000/post/${focusPost.id}/comment`,
+          `${import.meta.env.VITE_CONNECT}/post/${focusPost.id}/comment`,
           requestOptions
         ).then((response) =>
           response.json().then((data) => {

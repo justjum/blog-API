@@ -21,7 +21,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType, s
 
 
   useEffect(() => {
-    fetch("//127.0.0.1:3000/post/", requestOptions).then((response) =>
+    fetch(`${import.meta.env.VITE_CONNECT}/post/`, requestOptions).then((response) =>
       response.json().then((data) => {
         setPosts(data);
       })
@@ -58,7 +58,7 @@ export default function BlogPosts({ setAlertMessage, isLoggedIn, setAlertType, s
       
     };
 
-    fetch(`//127.0.0.1:3000/post/${id[0]}/isPublished`, requestOptions).then((response) =>
+    fetch(`${import.meta.env.VITE_CONNECT}/post/${id[0]}/isPublished`, requestOptions).then((response) =>
       response.json().then((data) => {
         const alertDialog = document.getElementById("alert-dialog");
         console.log(data);

@@ -33,7 +33,7 @@ export default function SignUp({ displaySignUp, setAlertMessage }) {
       mode: "cors",
     };
 
-    fetch("//127.0.0.1:3000/", requestOptions).then((response) =>
+    fetch(`${import.meta.env.VITE_CONNECT}/`, requestOptions).then((response) =>
       response.json().then((data) => {
         const alertDialog = document.getElementById("alert-dialog");
         if (data.errors) {

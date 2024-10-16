@@ -20,7 +20,7 @@ export default function Login({ handleLogin, setAlertMessage }) {
       mode: "cors",
     };
 
-    fetch("//127.0.0.1:3000/login", requestOptions).then((response) =>
+    fetch(`${import.meta.env.VITE_CONNECT}/login`, requestOptions).then((response) =>
       response.json().then((data) => {
         // Reset the login form
         if (data.error) {
