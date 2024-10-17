@@ -79,6 +79,12 @@ section {
   padding-bottom: 10px;
 }
 
+.post-card:hover {
+  cursor: pointer;
+  border: 3px solid #a4c991;
+  border-radius: 8px;
+}
+
 .card-image {
   width: 100%;
 }

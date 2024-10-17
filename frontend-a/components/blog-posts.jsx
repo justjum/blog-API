@@ -61,9 +61,8 @@ export default function BlogPosts({
       : "";
   }, [focusPost, addComment]);
 
-  const handleFocusPost = (e) => {
-    e.preventDefault();
-    setFocusPost(posts.find((post) => post.id == e.target.id));
+  const handleFocusPost = (id) => {
+    setFocusPost(posts.find((post) => post.id == id));
   };
 
   const handleClosePost = () => {
@@ -144,23 +143,20 @@ export default function BlogPosts({
           ) : (
             filteredPosts.map((post) => {
               return post.published ? (
-                <div className="post-card center" key={post.id}>
+                <div
+                  className="post-card center"
+                  key={post.id}
+                  onClick={() => handleFocusPost(post.id)}
+                  id={post.id}
+                >
                   <div className="card-image">
-                    <a href="">
-                      <img src={post.imageThumb} alt="" />
-                    </a>
+                    <img src={post.imageThumb} alt="" />
                   </div>
                   <div className="card-body">
                     <h3>{post.title}</h3>
                   </div>
                   <div>
-                    <button
-                      className="formInput"
-                      id={post.id}
-                      onClick={handleFocusPost}
-                    >
-                      Full Post
-                    </button>
+                    <button className="formInput">Full Post</button>
                   </div>
                 </div>
               ) : (
